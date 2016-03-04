@@ -3,6 +3,7 @@ package jp.co.drecom.spyflux.dispatcher;
 import org.greenrobot.eventbus.EventBus;
 
 import jp.co.drecom.spyflux.action.SpyAction;
+import jp.co.drecom.spyflux.action.SpyProcessedAction;
 
 /**
  * Created by huang_liangjin on 2016/03/02.
@@ -56,10 +57,10 @@ public class SpyDispatcher {
      * dispatch と notifyChange両方ともEvent busを使って、Actionをsubscriberにpostするですが
      * architecture視点から見ると、前者はActionCreator -> Storeで、後者はStore -> View という違いがあるので
      * 名前分けて実装しました
-     * @param action
+     * @param processedAction
      */
-    public void notifyChange(SpyAction action) {
-        mBus.post(action);
+    public void notifyChange(SpyProcessedAction processedAction) {
+        mBus.post(processedAction);
     }
 
 }

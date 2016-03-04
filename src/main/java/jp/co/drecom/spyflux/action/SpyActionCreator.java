@@ -8,4 +8,8 @@ import jp.co.drecom.spyflux.dispatcher.SpyDispatcher;
 public class SpyActionCreator {
     private final SpyDispatcher mDispatcher = SpyDispatcher.getInstance();
 
+    public final void post(SpyAction action) {
+        mDispatcher.dispatch(action);
+    }
+
 }
