@@ -40,9 +40,6 @@ public class SpyAction {
         }
 
         public Builder bundle(int key, Object value) {
-            if (key == 0) {
-                throw new IllegalArgumentException("key may not be 0.");
-            }
             if (value == null) {
                 throw new IllegalArgumentException("value may not be value");
             }
@@ -51,7 +48,9 @@ public class SpyAction {
         }
 
         public SpyAction build() {
-            if (type == 0 || data.size() == 0) {
+            if (type == 0) {
+                // data could be empty
+//            if (type == 0 || data.size() == 0) {
                 throw new IllegalArgumentException("the elements may not be empty");
             }
             return new SpyAction(type, data);

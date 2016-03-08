@@ -3,7 +3,6 @@ package jp.co.drecom.spyflux.dispatcher;
 import org.greenrobot.eventbus.EventBus;
 
 import jp.co.drecom.spyflux.action.SpyAction;
-import jp.co.drecom.spyflux.action.SpyProcessedAction;
 
 /**
  * Created by huang_liangjin on 2016/03/02.
@@ -24,15 +23,27 @@ public class SpyDispatcher {
     private static final SpyDispatcher mInstance = new SpyDispatcher();
     private static final EventBus mBus = EventBus.getDefault();
 
-    public static SpyDispatcher getInstance() {
+    private static SpyDispatcher getInstance() {
         return mInstance;
+    }
+
+    public static final void register(Object object) {
+        getInstance().registerInternal(object);
+    }
+
+    public static final void unregister(Object object) {
+        getInstance().unregisterInternal(object);
+    }
+
+    public static final void notifyView(SpyAction action) {
+        getInstance().notifyViewInternal(action);
     }
 
     /**
      * Store, ViewなどをDispatcherに登録する
      * @param object store, view.
      */
-    public void register(Object object) {
+    private void registerInternal(Object object) {
         mBus.register(object);
     }
 
@@ -40,27 +51,28 @@ public class SpyDispatcher {
      * Store, ViewなどをDispatcherから解除する
      * @param object
      */
-    public void unregister(Object object) {
+    private void unregisterInternal(Object object) {
         mBus.unregister(object);
     }
 
-    /**
-     * ActionCreatorからStoreにactionsを送る.
-     * @param action
-     */
-    public void dispatch(SpyAction action) {
-        mBus.post(action);
-    }
+    //StoreはEvent busのsubscriber対象から外されることと共に、こちらの関数もいらなくなる
+//    /**
+//     * ActionCreatorからStoreにactionsを送る.
+//     * @param action
+//     */
+//    public void dispatch(SpyAction action) {
+//        mBus.post(action);
+//    }
 
     /**
      * Storeで状態変化したactionをViewに送る
      * dispatch と notifyChange両方ともEvent busを使って、Actionをsubscriberにpostするですが
      * architecture視点から見ると、前者はActionCreator -> Storeで、後者はStore -> View という違いがあるので
      * 名前分けて実装しました
-     * @param processedAction
+     * @param action
      */
-    public void notifyChange(SpyProcessedAction processedAction) {
-        mBus.post(processedAction);
+    private void notifyViewInternal(SpyAction action) {
+        mBus.post(action);
     }
 
 }

@@ -1,6 +1,6 @@
 package jp.co.drecom.spyflux.ui;
 
-import jp.co.drecom.spyflux.action.SpyProcessedAction;
+import jp.co.drecom.spyflux.action.SpyAction;
 
 /**
  * Created by huang_liangjin on 2016/03/02.
@@ -14,7 +14,7 @@ import jp.co.drecom.spyflux.action.SpyProcessedAction;
  * abstract class からinterfaceに変更。
  */
 public interface SpyView {
-    public static final String TAG = "SpyView";
+    String TAG = "SpyView";
 //    /**
 //     * Storeからのデータを受け取って、Viewに反映するメソッドです。
 //     * 常にUI threadで実行します。
@@ -31,5 +31,5 @@ public interface SpyView {
      * overrideする時に、必ず@Subscribe(threadMode = ThreadMode.MAIN)を付けてください。
      * @param action
      */
-    public abstract void onNotifyChange(SpyProcessedAction action);
+    void onReceiveStoreMsg(SpyAction action);
 }

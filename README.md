@@ -36,6 +36,14 @@ Androidアプリを作るためのArchitectureです。
 ### その他
 
 ## SpyFluxの使い方
+1. 画面定義
+2. 画面で使われるデータを抽出し、Modelクラスにします
+3. ActionCreatorの定義(singletonにする必要があり)
+4. Storeの定義(singletonにする必要があります)
+5. Viewの実装(Activity, Fragmentなど)
+6. その他
+
+
 
 ## 難しいところ・悩むところ
 ### View, Action, Storeどちら先に定義する？
@@ -54,3 +62,20 @@ Androidアプリを作るためのArchitectureです。
 ### Storeのregisterタイミング
 StoreはViewと合わせて、使わないと意味がなくなりますので、
 各ViewにStoreを持ち、Viewがregisterタイミングで、Storeもregisterする
+
+### ViewとViewの間のInteraction
+例えば、FragmentのListViewのあるItemをクリックし、そのItem詳細画面を開くという操作：
+ViewとViewの間に渡すのはクリックしたItemの番号だけ、Itemそのもの渡さない。
+Item詳細画面Viewはその番号を使って、Storeの中から取得すべき。
+REMEMBER!!!Storeはデータの倉庫
+
+## メリッド
+1. アプリの構造はより分かりやすく、maintain cost下がる、
+2. Activityはdataを管理する必要はなくなる: onSaveInstanceState(), onCreate()などの関数で、Data一時保存、データの読み出すはいらなくなる.
+全てのデータはStoreの中にある。（Storeはsingletonですので、データなくなる配慮はいならい）
+
+
+## レビュー観点
+1. biz logic
+2. 変数: newすべきかどうか、typeあってるかどうか、
+3. メソッド: 
