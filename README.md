@@ -69,13 +69,17 @@ ViewとViewの間に渡すのはクリックしたItemの番号だけ、Itemそ�
 Item詳細画面Viewはその番号を使って、Storeの中から取得すべき。
 REMEMBER!!!Storeはデータの倉庫
 
+### ユーザ操作による画面遷移は、View側でカバーするか、Store経由して、pub/subよりするか
+この操作は、単純に画面遷移だけか、それとも何らかのbiz logicよりデータを処理する必要あるか
+
 ## メリッド
 1. アプリの構造はより分かりやすく、maintain cost下がる、
 2. Activityはdataを管理する必要はなくなる: onSaveInstanceState(), onCreate()などの関数で、Data一時保存、データの読み出すはいらなくなる.
 全てのデータはStoreの中にある。（Storeはsingletonですので、データなくなる配慮はいならい）
+3. テストしやすくなる
+
+## 最後に
+
+## 参考資料
 
 
-## レビュー観点
-1. biz logic
-2. 変数: newすべきかどうか、typeあってるかどうか、
-3. メソッド: 
