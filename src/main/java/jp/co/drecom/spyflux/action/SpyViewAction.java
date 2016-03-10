@@ -10,7 +10,7 @@ import java.util.List;
  * リクエストデータが含まれてます。
  * 場合によってリクエストデータはnullの可能性もあります（リクエスト出すだけ、データ処理はいらないとき）。
  */
-public class SpyViewAction {
+public final class SpyViewAction {
     /**
      * Stringの代わりに、intタイプを使います。
      */

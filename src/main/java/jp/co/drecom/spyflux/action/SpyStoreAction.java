@@ -19,7 +19,7 @@ import android.util.SparseArray;
  * 分けて管理した方がよいかと。
  * もう一つのメリットは、このActionはStore -> UI方向か、UI -> Store方向かというのも一目瞭然です。
  */
-public class SpyStoreAction {
+public final class SpyStoreAction {
 
     /**
      * Stringの代わりに、intタイプを使います。

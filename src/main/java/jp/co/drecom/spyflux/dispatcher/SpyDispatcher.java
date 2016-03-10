@@ -13,7 +13,7 @@ import jp.co.drecom.spyflux.ui.SpyView;
  * SpyDispatcher:
  * DispatcherはFlux frameworkでの位置付けは、
  * Center Hubみたいなもので、アプリのデータフローをコントロールします。
- * Store -> View, View -> Storeのデータフローは、全部dispatcher経由です。
+ * Store -> Viewのデータフローは、全部dispatcher経由です。
  * SpyFluxのSpyDispatcherとFluxのdispatcherちょっと違うところがありまして、
  * UI -> StoreのデータはSpyDispatcher経由しないところです。
  * SpyDispatcherが管理するのは、Store -> UIのデータフローだけです。
@@ -27,7 +27,7 @@ import jp.co.drecom.spyflux.ui.SpyView;
  * 2. Storeから生成したActionsをViewにdispatchすること
  *
  */
-public class SpyDispatcher {
+public final class SpyDispatcher {
     public static final String TAG = "SpyDispatcher";
     private static final SpyDispatcher mInstance = new SpyDispatcher();
     private static final EventBus mBus = EventBus.getDefault();
